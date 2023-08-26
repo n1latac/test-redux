@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header-link{
+        @apply inline-block text-gray-700 mr-3 border-b-2 pb-1 border-transparent hover:border-purple-700 hover:text-purple-700 transition-all duration-200
+    }

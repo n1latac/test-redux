@@ -1,12 +1,18 @@
 import Home from "./pages/Home";
-import Header from "./components/Header";
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import Layout from "./components/Layout";
+import SignUpForm from './components/SignUp'
 
 function App() {
   return (
-    <div className="App">
-      <Header/>
-     <Home/>
-    </div>
+    <BrowserRouter>
+    <Layout>
+    <Routes>
+        <Route element={<Home/>} path={'/'}/>
+        <Route element={<SignUpForm/>} path={'/signUp'}/>
+    </Routes>
+    </Layout>
+    </BrowserRouter>
   );
 }
 

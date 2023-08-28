@@ -11,13 +11,16 @@ function CustomField(props) {
             form: {touched, errors},
             meta
         })=>{
-            return(
-                <div>
-                    <input type={props.type} placeholder={props.placeholder ? props.placeholder : ''} class={props.class ? props.class : null} {...field}/>
-                    {meta.touched && meta.error && (
-                        <div class="text-red-500">{meta.error}</div>
-                    )}
-                </div>
+              return (
+                  <div class="w-full mb-6 px-4">
+                      <div class="h-12 relative">
+                          <input type={props.type} class={props.class ? props.class : null} placeholder={props.placeholder} {...field} />
+                          {props.children}
+                      </div>
+                      {meta.touched && meta.error && (
+                          <div class="text-red-500 mt-2 ml-4">{meta.error}</div>
+                      )}
+                  </div>
             )
         }}
     </Field>

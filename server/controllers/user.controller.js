@@ -5,7 +5,7 @@ module.exports.createUser = async(req, res, next) => {
     try {
         const {body, passwordHash} = req
         const user = await User.create({...body, password: passwordHash})
-        res.status(200).send(user)
+        res.status(200).send({data:user})
     } catch (error) {
         res.status(400).send(error.message)
     }

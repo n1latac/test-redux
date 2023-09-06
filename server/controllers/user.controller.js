@@ -1,11 +1,13 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/User')
+const {createToken} = require('../services/tokenAuth')
 
 module.exports.createUser = async(req, res, next) => {
     try {
         const {body, passwordHash} = req
         const user = await User.create({...body, password: passwordHash})
-        res.status(200).send({data:user})
+        const accessToken = await createToken({userId: user._id, email: user.email})
+        res.status(200).send({data:user, tokens: {accessToken: accessToken}})
     } catch (error) {
         res.status(400).send(error.message)
     }

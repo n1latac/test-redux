@@ -2,27 +2,33 @@ import React from 'react'
 import {Form, Formik} from 'formik'
 import {Link} from 'react-router-dom'
 import CustomField from '../CustomField'
-import { registrationSchema } from '../../validation'
+import { loginSchema } from '../../validation'
+import { connect } from 'react-redux'
+import {loginUserRequest} from '../../actions/actionCreator'
 
 const initialState = {
   email: '',
   password: '',
 }
 
-const submitHandler = ({values, action}) => {
-  console.log('hi')
-}
 
-function SignInForm() {
+
+function SignInForm(props) {
+
+
+  const submitHandler = (values, action) => {
+    props.loginUserRequest(values)
+  }
+
   return (
     <div class="flex bg-violet-300 items-center justify-center min-h-screen bg-signUp bg-cover bg-center">
         <Formik
         initialValues={initialState}
         onSubmit={submitHandler}
-        validationSchema={registrationSchema}
+        validationSchema={loginSchema}
         >
           {(formikProps)=> {
-            console.log(formikProps)
+            //console.log(formikProps)
             return(
               <Form class="flex flex-col items-center justify-center bg-transparent border-2 border-black backdrop-blur-2xl rounded-3xl w-[400px] min-h-[450px] shadow-black/60 shadow-2xl">
                 <h3 class="text-center text-3xl font-bold mt-4 mb-6">Sign In</h3>               
@@ -34,7 +40,7 @@ function SignInForm() {
                 </CustomField>
                 <button class="px-10 py-2 mb-4 border-2 rounded-xl text-xl border-gray-600 hover:bg-slate-300" type="submit">Submit</button>
                 <div class="mb-4">
-                  <p>have account <Link class="underline hover:text-slate-600" to={'/signUp'}>Sign Up</Link></p>
+                  <p>Don't have an account? <Link class="underline hover:text-slate-600" to={'/signUp'}>Sign Up</Link></p>
                 </div>
               </Form>
             )
@@ -44,4 +50,8 @@ function SignInForm() {
   )
 }
 
-export default SignInForm
+const mapDispatchToProps={
+  loginUserRequest
+}
+
+export default connect(null, mapDispatchToProps)(SignInForm)

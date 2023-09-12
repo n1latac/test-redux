@@ -5,11 +5,22 @@ const {createToken} = require('../services/tokenAuth')
 module.exports.createUser = async(req, res, next) => {
     try {
         const {body, passwordHash} = req
-        const user = await User.create({...body, password: passwordHash})
-        const accessToken = await createToken({userId: user._id, email: user.email})
-        res.status(200).send({data:user, tokens: {accessToken: accessToken}})
+        const foundUser = await User.findOne({email: body.email})
+        if(foundUser){
+            res.status(401).send({error: 'this email already registered'})
+        }else{
+            const user = await User.create({...body, password: passwordHash})
+            const accessToken = await createToken({userId: user._id, email: user.email})
+
+            const userWithoutPassword = foundUser.toObject()
+            delete userWithoutPassword.password
+            
+            console.log(userWithoutPassword)
+            res.status(200).send({data:userWithoutPassword, message: 'you have registered', tokens: {accessToken: accessToken}})
+        }
+        
     } catch (error) {
-        res.status(400).send(error.message)
+        res.status(401).send(error.message)
     }
 }
 module.exports.loginUser = async(req, res, next) => {
@@ -19,14 +30,19 @@ module.exports.loginUser = async(req, res, next) => {
         if(foundUser){
             const result = await bcrypt.compare(password, foundUser.password)
             if(result){
-                res.status(200).send({message: 'you are log in'})
+                const accessToken = await createToken({userId: foundUser._id, email: foundUser.email})
+
+                const userWithoutPassword = foundUser.toObject()
+                delete userWithoutPassword.password
+
+                res.status(200).send({message: 'you are log in', data: userWithoutPassword, tokens: {accessToken: accessToken}})
             }else{
-                res.status(400).send({message: 'password is incorrect'})
+                res.status(401).send({error: 'password is incorrect'})
             }
         }else{
-            res.status(400).send({message: 'email is invalid'})
+            res.status(401).send({error: 'email is incorrect'})
         }
     } catch (error) {
-        res.status(400).send(error.message)
+        res.status(401).send(error.message)
     }
 }

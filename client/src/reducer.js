@@ -30,6 +30,28 @@ export default function reducer(state = initialState, action){
                 error: action.error
             }
         }
+        case ACTION_TYPES.LOGIN_USER_REQUEST:{
+            return{
+                ...state,
+                isFetching: true
+            }
+        }
+        case ACTION_TYPES.LOGIN_USER_SUCCESS:{
+            return{
+                ...state,
+                isFetching: false,
+                user: action.data,
+                error: null
+            }
+        }
+        case ACTION_TYPES.LOGIN_USER_ERROR:{
+            return{
+                ...state,
+                isFetching: false,
+                user: null,
+                error: action.error
+            }
+        }
         default:{
             return{
                 ...state

@@ -1,12 +1,11 @@
 import { instance } from "./instance";
 
 export async function register(userData){
-    try {
-        let {data:{data, tokens: {accessToken}}} = await instance.post('/user/signup', userData)
-        localStorage.setItem('accessToken', accessToken)
+    const {data} = await instance.post('/user/signup', userData)
         return data
-    } catch (error) {
-        console.log(error.response.data, 'error')
-        return Promise.reject(error.response.data) 
-    }
+}
+
+export async function login(userData){
+        const {data} = await instance.post('/user/login', userData)
+        return data
 }

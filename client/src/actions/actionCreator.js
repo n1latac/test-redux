@@ -18,3 +18,21 @@ export function registerUserError(error){
         error
     })
 }
+export function loginUserRequest(payload){
+    return({
+        type: ACTION_TYPES.LOGIN_USER_REQUEST,
+        payload
+    })
+}
+export function loginUserSuccess(data){
+    return({
+        type: ACTION_TYPES.LOGIN_USER_SUCCESS,
+        data
+    })
+}
+export function loginUserError(error){
+    return({
+        type: ACTION_TYPES.LOGIN_USER_ERROR,
+        error
+    })
+}

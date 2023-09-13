@@ -8,7 +8,7 @@ const ACCESS_SECRET = 'vcyeveyrebcDSJ'
 
 module.exports.createToken = async({userId, email})=>{
     return await promisifyJwtSign({userId, email}, ACCESS_SECRET,{
-        expiresIn: 60*30
+        expiresIn: 6
     })
 }
 

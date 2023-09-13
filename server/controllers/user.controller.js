@@ -46,3 +46,13 @@ module.exports.loginUser = async(req, res, next) => {
         res.status(401).send(error.message)
     }
 }
+
+module.exports.getMe = async(req, res, next) => {
+    try {
+        const {userIdFromToken} = req
+        const foundUser = await User.findById(userIdFromToken).select('-password')
+        res.status(200).send(foundUser)
+    } catch (error) {
+        res.status(403).send(error.message)
+    }
+}

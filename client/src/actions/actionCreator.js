@@ -36,3 +36,20 @@ export function loginUserError(error){
         error
     })
 }
+export function getMeRequest(){
+    return({
+        type: ACTION_TYPES.GET_ME_REQUEST
+    })
+}
+export function getMeSuccess(data){
+    return({
+        type: ACTION_TYPES.GET_ME_SUCCESS,
+        data
+    })
+}
+export function getMeError(error){
+    return({
+        type: ACTION_TYPES.GET_ME_ERROR,
+        error
+    })
+}

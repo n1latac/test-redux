@@ -13,3 +13,7 @@ export async function checkAuth(){
     const {data} = await instance.get('/user/getMe')
     return data
 }
+export async function userExit(){
+    const {data} = await instance.get('/user/exit')
+    return data
+}

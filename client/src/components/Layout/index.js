@@ -8,7 +8,7 @@ function Layout({children}) {
     <>
         <Header/>
         <main>{children}</main>
-        <ToastContainer/>
+        <ToastContainer position='bottom-right'/>
     </>
   )
 }

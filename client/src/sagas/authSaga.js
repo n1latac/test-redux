@@ -2,10 +2,11 @@ import {put} from 'redux-saga/effects'
 import history from '../browserHistory'
 import {toast} from 'react-toastify'
 
-import { register, login, checkAuth } from '../api/user'
+import { register, login, checkAuth, userExit } from '../api/user'
 import { registerUserSuccess, registerUserError,
 loginUserError, loginUserSuccess,
-getMeSuccess, getMeError } from '../actions/actionCreator'
+getMeSuccess, getMeError,
+userExitSuccess, userExitError } from '../actions/actionCreator'
 
 
 
@@ -41,5 +42,16 @@ export function* checkAuthSaga(){
     } catch (error) {
         console.log(error)
         yield put(getMeError(error.errorMessage))
+    }
+}
+export function* userExitSaga(){
+    try {
+        const result = yield userExit()
+        localStorage.removeItem('accessToken')
+        yield put(userExitSuccess())
+        toast(result.message)
+    } catch (error) {
+        console.log(error)
+        yield put(userExitError(error))
     }
 }

@@ -53,3 +53,19 @@ export function getMeError(error){
         error
     })
 }
+export function userExitRequest(){
+    return({
+        type: ACTION_TYPES.USER_EXIT_REQUEST
+    })
+}
+export function userExitSuccess(){
+    return({
+        type: ACTION_TYPES.USER_EXIT_SUCCESS,
+    })
+}
+export function userExitError(error){
+    return({
+        type: ACTION_TYPES.USER_EXIT_ERROR,
+        error
+    })
+}

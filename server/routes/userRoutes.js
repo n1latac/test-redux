@@ -8,5 +8,6 @@ const userRouter = Router()
 userRouter.get('/getMe', checkToken, userController.getMe)
 userRouter.post('/signup', createPasswordHash, userController.createUser)
 userRouter.post('/login', userController.loginUser)
+userRouter.get('/exit',checkToken,userController.userExit)
 
 module.exports = userRouter

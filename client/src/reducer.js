@@ -74,6 +74,27 @@ export default function reducer(state = initialState, action){
                 error: action.error
             }
         }
+        case ACTION_TYPES.USER_EXIT_REQUEST:{
+            return{
+                ...state,
+                isFetching: true,
+                error: null
+            }
+        }
+        case ACTION_TYPES.USER_EXIT_SUCCESS:{
+            return{
+                ...state,
+                isFetching: false,
+                user: null
+            }
+        }
+        case ACTION_TYPES.USER_EXIT_ERROR:{
+            return{
+                ...state,
+                isFetching: false,
+                error: action.error
+            }
+        }
         default:{
             return{
                 ...state

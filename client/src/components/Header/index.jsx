@@ -16,7 +16,7 @@ function Header(props) {
           <ul class="flex">
             <li><Link to={'/'} class="header-link">Главная</Link></li>
             <li><a href='#' class="header-link">Мои Статьи</a></li>
-            <li><a href='#' class="header-link">Добавить статью</a></li>
+            <li><Link to={'/addPost'} class="header-link">Добавить статью</Link></li>
           </ul>
         </nav>
         {props.user

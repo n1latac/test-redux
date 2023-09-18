@@ -69,3 +69,21 @@ export function userExitError(error){
         error
     })
 }
+export function createPostRequest(payload){
+    return({
+        type: ACTION_TYPES.CREATE_POST_REQUEST,
+        payload
+    })
+}
+export function createPostSuccess(data){
+    return({
+        type: ACTION_TYPES.CREATE_POST_SUCCESS,
+        data
+    })
+}
+export function createPostError(error){
+    return({
+        type: ACTION_TYPES.CREATE_POST_ERROR,
+        error
+    })
+}

@@ -6,6 +6,10 @@ const postSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
+    imagePath:{
+        type: String,
+        required: false
+    },
     title:{
         type: String,
         required: true,

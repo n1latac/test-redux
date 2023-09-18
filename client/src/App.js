@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import Layout from "./components/Layout";
 import SignUpForm from './components/SignUp'
 import SignInForm from "./components/SignIn";
+import AddPost from "./pages/AddPostPage";
 import history from "./browserHistory";
 import { getMeRequest } from "./actions/actionCreator";
 
@@ -22,6 +23,7 @@ function App(props) {
         <Route element={<Home/>} path={'/'}/>
         <Route element={<SignUpForm/>} path={'/signUp'}/>
         <Route element={<SignInForm/>} path={'/signIn'}/>
+        <Route element={<AddPost/>} path={'/addPost'}/>
     </Routes>
     </Layout>
     </HistoryRouter>

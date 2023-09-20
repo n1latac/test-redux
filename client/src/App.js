@@ -9,6 +9,7 @@ import SignInForm from "./components/SignIn";
 import AddPost from "./pages/AddPostPage";
 import history from "./browserHistory";
 import { getMeRequest } from "./actions/actionCreator";
+import OwnPostPage from "./pages/OwnPostPage";
 
 function App(props) {
 
@@ -24,6 +25,7 @@ function App(props) {
         <Route element={<SignUpForm/>} path={'/signUp'}/>
         <Route element={<SignInForm/>} path={'/signIn'}/>
         <Route element={<AddPost/>} path={'/addPost'}/>
+        <Route element={<OwnPostPage/>} path={'/ownPosts'}/>
     </Routes>
     </Layout>
     </HistoryRouter>
@@ -31,7 +33,7 @@ function App(props) {
 }
 
 const mapStateToProps= (state) =>{
-  return state.user
+  return state.userStore
 }
 
 const mapDispatchToProps = {

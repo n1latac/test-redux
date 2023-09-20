@@ -1,7 +1,8 @@
 import {put} from 'redux-saga/effects'
 
-import {createPost} from '../api/post'
-import {createPostSuccess, createPostError} from '../actions/actionCreator'
+import {createPost, getOwnPosts} from '../api/post'
+import {createPostSuccess, createPostError,
+getOwnPostsSuccess, getOwnPostsError} from '../actions/actionCreator'
 import { toast } from 'react-toastify'
 
 export function* addPostSaga(action){
@@ -11,5 +12,14 @@ export function* addPostSaga(action){
         toast('your post is added')
     } catch (error) {
         yield put(createPostError(error))
+    }
+}
+
+export function* getOwnPostsSaga(){
+    try {
+        const posts = yield getOwnPosts()
+        yield put(getOwnPostsSuccess(posts))
+    } catch (error) {
+        yield put(getOwnPostsError(error))
     }
 }

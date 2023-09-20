@@ -5,7 +5,7 @@ import PopUpExit from '../PopUpExit'
 
 
 function Header(props) {
-
+  console.log(props)
   return (
     <header class="bg-slate-200 relative">
       <div class="py-4 px-5 flex justify-between items-center">
@@ -15,8 +15,12 @@ function Header(props) {
         <nav>
           <ul class="flex">
             <li><Link to={'/'} class="header-link">Главная</Link></li>
-            <li><a href='#' class="header-link">Мои Статьи</a></li>
+            {props.user && 
+            <>
+            <li><Link to={'ownPosts'} class="header-link">Мои Статьи</Link></li>
             <li><Link to={'/addPost'} class="header-link">Добавить статью</Link></li>
+            </>}
+            
           </ul>
         </nav>
         {props.user
@@ -34,6 +38,9 @@ function Header(props) {
   )
 }
 
-const mapStateToProps = ({user}) => ({user})
+const mapStateToProps = (state) => {
+  //console.log(state.userStore.user)
+  return state.userStore
+}
 
 export default connect(mapStateToProps, null)(Header)

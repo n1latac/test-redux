@@ -9,3 +9,8 @@ export async function createPost(payload){
     })
     return data
 }
+
+export async function getOwnPosts(){
+    const {data} = await instance.get('/post/ownPosts')
+    return data
+}

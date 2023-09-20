@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       backgroundImage:{
         'signUp': "url('../public/images/signUp.jpg')"
+      },
+      boxShadow:{
+        'custom': '0px 0px 8px 2px rgba(0, 0, 0, 0.5)'
       }
     },
   },

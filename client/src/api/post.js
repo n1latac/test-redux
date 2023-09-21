@@ -14,3 +14,7 @@ export async function getOwnPosts(){
     const {data} = await instance.get('/post/ownPosts')
     return data
 }
+export async function getPostById(postId){
+    const {data} = await instance.get(`/post/ownPosts/${postId}`)
+    return data
+}

@@ -104,3 +104,21 @@ export function getOwnPostsError(error){
         error
     })
 }
+export function getPostByIdRequest(payload){
+    return({
+        type: ACTION_TYPES.GET_POST_BY_ID_REQUEST,
+        payload
+    })
+}
+export function getPostByIdSuccess(data){
+    return({
+        type: ACTION_TYPES.GET_POST_BY_ID_SUCCESS,
+        data
+    })
+}
+export function getPostByIdError(error){
+    return({
+        type: ACTION_TYPES.GET_POST_BY_ID_ERROR,
+        error
+    })
+}

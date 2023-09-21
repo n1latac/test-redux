@@ -10,6 +10,7 @@ import AddPost from "./pages/AddPostPage";
 import history from "./browserHistory";
 import { getMeRequest } from "./actions/actionCreator";
 import OwnPostPage from "./pages/OwnPostPage";
+import PostPage from "./pages/PostPage";
 
 function App(props) {
 
@@ -26,6 +27,7 @@ function App(props) {
         <Route element={<SignInForm/>} path={'/signIn'}/>
         <Route element={<AddPost/>} path={'/addPost'}/>
         <Route element={<OwnPostPage/>} path={'/ownPosts'}/>
+        <Route element={<PostPage/>} path={'/ownPosts/:postId'}/>
     </Routes>
     </Layout>
     </HistoryRouter>

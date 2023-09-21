@@ -50,6 +50,7 @@ export function* userExitSaga(){
         localStorage.removeItem('accessToken')
         yield put(userExitSuccess())
         toast(result.message)
+        history.push('/')
     } catch (error) {
         console.log(error)
         yield put(userExitError(error))

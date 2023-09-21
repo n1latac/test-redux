@@ -12,12 +12,18 @@ function AddPost(props) {
 
     const formik = useFormik({
          initialValues: {
-            postImage: null,
+            postImage: '',
             title: '',
             text: ''
         },
         onSubmit:(values, action)=>{
-            props.createPostRequest(formik.values)
+            if(formik.values.postImage){
+                props.createPostRequest(formik.values)
+            }else{
+                const postWithoutImage = {...formik.values}
+                delete postWithoutImage.postImage
+                props.createPostRequest(postWithoutImage)
+            }
             action.resetForm()
         }
     })

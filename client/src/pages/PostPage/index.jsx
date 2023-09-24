@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { instance } from '../../api/instance'
 import { Link, useParams } from 'react-router-dom'
 import history from '../../browserHistory'
+import { toast } from 'react-toastify'
 
 // import {getPostByIdRequest} from '../../actions/actionCreator'
 
@@ -22,6 +23,7 @@ function PostPage(props) {
   const deletePost = useCallback(async()=>{
     await instance.delete(`http://localhost:5000/api/post/ownPosts/${params.postId}`)
     history.push('/ownPosts')
+    toast('post deleted')
   })
 
   

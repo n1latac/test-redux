@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import {Formik, Field, Form, useFormik} from 'formik'
+import {Formik,  Form, useFormik} from 'formik'
 
 import {createPostRequest} from '../../actions/actionCreator'
 import {connect} from 'react-redux'
@@ -55,8 +54,8 @@ function AddPost(props) {
                           </label>
 
                           {formik.values.postImage
-                              ? <div className='py-2 w-[400px] h-[200px] object-cover'>
-                                  <img src={URL.createObjectURL(formik.values.postImage)} alt="" />
+                              ? <div className='py-8'>
+                                  <img className='w-[400px] h-[300px] object-cover' src={URL.createObjectURL(formik.values.postImage)} alt="" />
                               </div>
                               : null}
 

@@ -48,6 +48,11 @@ export default function postReducer(state = initialState, action){
                 error: action.error
             }
         }
+        case ACTION_TYPES.FETCH_POSTS_SUCCESS:{
+            return{
+                ...state
+            }
+        }
         default:{
             return{
                 ...state

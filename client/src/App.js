@@ -11,12 +11,14 @@ import history from "./browserHistory";
 import { getMeRequest } from "./actions/actionCreator";
 import OwnPostPage from "./pages/OwnPostPage";
 import PostPage from "./pages/PostPage";
+import EditPostPage from "./pages/EditPostPage";
 
 function App(props) {
 
   useEffect(() => {
       props.getMeRequest()
   }, [])
+
 
   return (
     <HistoryRouter history={history}>
@@ -25,9 +27,14 @@ function App(props) {
         <Route element={<Home/>} path={'/'}/>
         <Route element={<SignUpForm/>} path={'/signUp'}/>
         <Route element={<SignInForm/>} path={'/signIn'}/>
+        {props.user && 
+        <>
         <Route element={<AddPost/>} path={'/addPost'}/>
         <Route element={<OwnPostPage/>} path={'/ownPosts'}/>
         <Route element={<PostPage/>} path={'/ownPosts/:postId'}/>
+        <Route element={<EditPostPage/>} path={'/ownPosts/edit/:postId'}/>
+        </>}
+        
     </Routes>
     </Layout>
     </HistoryRouter>

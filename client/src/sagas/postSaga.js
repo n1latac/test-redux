@@ -1,6 +1,6 @@
 import {put} from 'redux-saga/effects'
 
-import {createPost, getOwnPosts, getPostById} from '../api/post'
+import {createPost, getOwnPosts, changePost} from '../api/post'
 import {createPostSuccess, createPostError,
 getOwnPostsSuccess, getOwnPostsError} from '../actions/actionCreator'
 import { toast } from 'react-toastify'
@@ -23,11 +23,6 @@ export function* getOwnPostsSaga(){
         yield put(getOwnPostsError(error))
     }
 }
-export function* getPostByIdSaga(action){
-    try {
-        const post = yield getPostById(action.payload)
-        console.log(post)
-    } catch (error) {
-        console.log(error)
-    }
-}
+
+
+

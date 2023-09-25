@@ -17,6 +17,7 @@ import MainPage from "./pages/MainPage";
 function App(props) {
 
   useEffect(() => {
+    localStorage.getItem('accessToken') &&
       props.getMeRequest()
   }, [])
 

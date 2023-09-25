@@ -58,11 +58,10 @@ export function* refreshSessionSaga(){
 }
 export function* userExitSaga(){
     try {
-        const result = yield userExit()
         localStorage.removeItem('accessToken')
         localStorage.removeItem('refreshToken')
         yield put(userExitSuccess())
-        toast(result.message)
+        toast('you are logout')
         history.push('/')
     } catch (error) {
         console.log(error)

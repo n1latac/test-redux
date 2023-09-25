@@ -22,7 +22,7 @@ instance.interceptors.response.use(async (response)=>{
     return response
     
 }, async function(err){
-    if(err.response.status === 403){
+    if(err.response.status === 403 && localStorage.getItem('refreshToken')){
          await store.dispatch(refreshSessionRequest())
          return
         

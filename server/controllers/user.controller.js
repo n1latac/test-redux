@@ -75,15 +75,3 @@ module.exports.refreshSession = async(req, res, next) => {
         res.status(401).send(error.message)
     }
 }
-module.exports.userExit = async(req, res, next) => {
-    try {
-        const {userIdFromToken} = req
-        if(userIdFromToken){
-            res.status(200).send({message: 'you are log out'})
-        }else{
-            res.status(403).send({errorMessage: 'Нет доступа'})
-        }
-    } catch (error) {
-        res.status(403).send(error.message)
-    }
-}

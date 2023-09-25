@@ -7,7 +7,7 @@ const promisifyJwtVerify = promisify(jwt.verify)
 
 module.exports.createToken = async({userId, email})=>{
     return await promisifyJwtSign({userId, email}, process.env.ACCESS_SECRET,{
-        expiresIn: 6
+        expiresIn: 60*60
     })
 }
 

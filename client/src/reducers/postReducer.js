@@ -48,9 +48,24 @@ export default function postReducer(state = initialState, action){
                 error: action.error
             }
         }
-        case ACTION_TYPES.FETCH_POSTS_SUCCESS:{
+        case ACTION_TYPES.GET_ALL_POSTS_REQUEST:{
             return{
-                ...state
+                ...state,
+                isFetching: true
+            }
+        }
+        case ACTION_TYPES.GET_ALL_POSTS_SUCCESS:{
+            return{
+                ...state,
+                isFetching: false,
+                posts: action.data
+            }
+        }
+        case ACTION_TYPES.GET_ALL_POSTS_ERROR:{
+            return{
+                ...state,
+                isFetching: false,
+                error: action.error
             }
         }
         default:{

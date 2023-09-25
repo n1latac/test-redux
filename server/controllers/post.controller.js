@@ -63,3 +63,11 @@ module.exports.deletePost = async(req, res, next) => {
         res.status(400).send({errorMessage: `can't delete post`})
     }
 }
+module.exports.getAllPosts = async(req, res, next)=>{
+    try {
+        const allPosts = await Post.find()
+        res.status(200).send(allPosts)
+    } catch (error) {
+        res.status(400).send({errorMessage: `can't get all posts`})
+    }
+}

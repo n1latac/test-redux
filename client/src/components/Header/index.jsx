@@ -15,6 +15,7 @@ function Header(props) {
         <nav>
           <ul class="flex">
             <li><Link to={'/'} class="header-link">Главная</Link></li>
+            <li><Link to={'/mainPage'} class="header-link">Посты</Link></li>
             {props.user && 
             <>
             <li><Link to={'ownPosts'} class="header-link">Мои Статьи</Link></li>
@@ -39,7 +40,6 @@ function Header(props) {
 }
 
 const mapStateToProps = (state) => {
-  //console.log(state.userStore.user)
   return state.userStore
 }
 

@@ -14,6 +14,7 @@ export function* registerSaga(action){
     try {
         const {data, tokens:{accessToken}, message} = yield register(action.payload)
         localStorage.setItem('accessToken', accessToken)
+        console.log(data, 'data')
         yield put(registerUserSuccess(data))
         toast(message, {position: 'bottom-right'})
         history.push('/')

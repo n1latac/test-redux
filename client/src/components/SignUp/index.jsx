@@ -2,10 +2,12 @@ import React from 'react'
 import {Form, Formik} from 'formik'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {toast} from 'react-toastify'
 
 import CustomField from '../CustomField'
 import { registrationSchema } from '../../validation'
 import {registerUserRequest} from '../../actions/actionCreator'
+import history from '../../browserHistory'
 
 const initialState = {
   firstName: '',

@@ -104,3 +104,20 @@ export function getOwnPostsError(error){
         error
     })
 }
+export function getAllPostsRequest(){
+    return({
+        type: ACTION_TYPES.GET_ALL_POSTS_REQUEST
+    })
+}
+export function getAllPostsSuccess(data){
+    return({
+        type: ACTION_TYPES.GET_ALL_POSTS_SUCCESS,
+        data
+    })
+}
+export function getAllPostsError(error){
+    return({
+        type: ACTION_TYPES.GET_ALL_POSTS_ERROR,
+        error
+    })
+}

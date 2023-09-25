@@ -12,6 +12,7 @@ import { getMeRequest } from "./actions/actionCreator";
 import OwnPostPage from "./pages/OwnPostPage";
 import PostPage from "./pages/PostPage";
 import EditPostPage from "./pages/EditPostPage";
+import MainPage from "./pages/MainPage";
 
 function App(props) {
 
@@ -27,11 +28,12 @@ function App(props) {
         <Route element={<Home/>} path={'/'}/>
         <Route element={<SignUpForm/>} path={'/signUp'}/>
         <Route element={<SignInForm/>} path={'/signIn'}/>
+        <Route element={<MainPage/>} path={'/mainPage'}/>
+        <Route element={<PostPage/>} path={'/ownPosts/:postId'}/>
         {props.user && 
         <>
         <Route element={<AddPost/>} path={'/addPost'}/>
         <Route element={<OwnPostPage/>} path={'/ownPosts'}/>
-        <Route element={<PostPage/>} path={'/ownPosts/:postId'}/>
         <Route element={<EditPostPage/>} path={'/ownPosts/edit/:postId'}/>
         </>}
         

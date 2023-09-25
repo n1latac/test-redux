@@ -12,10 +12,9 @@ module.exports.createUser = async(req, res, next) => {
             const user = await User.create({...body, password: passwordHash})
             const accessToken = await createToken({userId: user._id, email: user.email})
 
-            const userWithoutPassword = foundUser.toObject()
+            const userWithoutPassword = user.toObject()
             delete userWithoutPassword.password
             
-            console.log(userWithoutPassword)
             res.status(200).send({data:userWithoutPassword, message: 'you have registered', tokens: {accessToken: accessToken}})
         }
         

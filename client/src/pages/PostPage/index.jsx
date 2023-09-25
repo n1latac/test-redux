@@ -44,8 +44,12 @@ function PostPage(props) {
         </div>
         {post.imagePath && <img className='w-full object-cover border-2' src={`http://localhost:5000/${post.imagePath}`} alt="" />}
         <div className='flex justify-end pr-8 my-8'>
-        <Link to={`/ownPosts/edit/${params.postId}`}><button className='w-[150px] bg-violet-300 rounded-xl py-2 hover:bg-violet-600 hover:text-white mr-4'>Change POST</button></Link>
-        <button onClick={deletePost} className='w-[150px] bg-violet-300 rounded-xl py-2 hover:bg-violet-600 hover:text-white'>Delete POST</button>
+          {props.userStore.user ? props.userStore.user._id === post.authorId &&(
+            <>
+            <Link to={`/ownPosts/edit/${params.postId}`}><button className='w-[150px] bg-violet-300 rounded-xl py-2 hover:bg-violet-600 hover:text-white mr-4'>Change POST</button></Link>
+            <button onClick={deletePost} className='w-[150px] bg-violet-300 rounded-xl py-2 hover:bg-violet-600 hover:text-white'>Delete POST</button>
+            </>
+          ): null}
         </div>
         
       </section> 

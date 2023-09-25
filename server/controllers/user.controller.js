@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/User')
-const {createToken} = require('../services/tokenAuth')
+const {createToken, createRefreshToken, verifyRefreshToken} = require('../services/tokenAuth')
 
 module.exports.createUser = async(req, res, next) => {
     try {
@@ -11,11 +11,12 @@ module.exports.createUser = async(req, res, next) => {
         }else{
             const user = await User.create({...body, password: passwordHash})
             const accessToken = await createToken({userId: user._id, email: user.email})
+            const refreshToken = await createRefreshToken({userId: user._id, email: user.email})
 
             const userWithoutPassword = user.toObject()
             delete userWithoutPassword.password
             
-            res.status(200).send({data:userWithoutPassword, message: 'you have registered', tokens: {accessToken: accessToken}})
+            res.status(200).send({data:userWithoutPassword, message: 'you have registered', tokens: {accessToken, refreshToken}})
         }
         
     } catch (error) {
@@ -30,11 +31,12 @@ module.exports.loginUser = async(req, res, next) => {
             const result = await bcrypt.compare(password, foundUser.password)
             if(result){
                 const accessToken = await createToken({userId: foundUser._id, email: foundUser.email})
+                const refreshToken = await createRefreshToken({userId: foundUser._id, email: foundUser.email})
 
                 const userWithoutPassword = foundUser.toObject()
                 delete userWithoutPassword.password
 
-                res.status(200).send({message: 'you are log in', data: userWithoutPassword, tokens: {accessToken: accessToken}})
+                res.status(200).send({message: 'you are log in', data: userWithoutPassword, tokens: {accessToken, refreshToken}})
             }else{
                 res.status(401).send({error: 'password is incorrect'})
             }
@@ -52,7 +54,25 @@ module.exports.getMe = async(req, res, next) => {
         const foundUser = await User.findById(userIdFromToken).select('-password')
         res.status(200).send(foundUser)
     } catch (error) {
-        res.status(403).send(error.message)
+        res.status(401).send(error.message)
+    }
+}
+module.exports.refreshSession = async(req, res, next) => {
+    try {
+        const {body:{refreshToken}} = req
+        const RT = await verifyRefreshToken(refreshToken)
+        console.log(RT)
+        if(RT.userId){
+            const foundUser = await User.findById(RT.userId)
+            console.log(foundUser)
+            const accessToken = await createToken({userId: foundUser._id, email: foundUser.email})
+            const refreshT = await createRefreshToken({userId: foundUser._id, email: foundUser.email})
+            res.status(200).send({data: foundUser, tokens: {accessToken, refreshToken: refreshT}})
+        }else{
+            res.status(401).send({errorMessage: 'НЕТ доступа'})
+        }
+    } catch (error) {
+        res.status(401).send(error.message)
     }
 }
 module.exports.userExit = async(req, res, next) => {

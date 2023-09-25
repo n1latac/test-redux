@@ -1,7 +1,7 @@
 import { takeLatest} from 'redux-saga/effects'
 
 import ACTION_TYPES from '../actions/actionTypes'
-import {registerSaga, loginUserSaga, checkAuthSaga, userExitSaga} from './authSaga'
+import {registerSaga, loginUserSaga, checkAuthSaga, userExitSaga, refreshSessionSaga} from './authSaga'
 import {addPostSaga, getOwnPostsSaga, getAllPostsSaga} from './postSaga'
 
 function* rootSaga(){
@@ -12,6 +12,7 @@ function* rootSaga(){
     yield takeLatest(ACTION_TYPES.CREATE_POST_REQUEST, addPostSaga)
     yield takeLatest(ACTION_TYPES.GET_OWN_POSTS_REQUEST, getOwnPostsSaga)
     yield takeLatest(ACTION_TYPES.GET_ALL_POSTS_REQUEST, getAllPostsSaga)
+    yield takeLatest(ACTION_TYPES.REFRESH_SESSION_REQUEST, refreshSessionSaga)
 }
 
 export default rootSaga

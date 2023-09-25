@@ -121,3 +121,20 @@ export function getAllPostsError(error){
         error
     })
 }
+export function refreshSessionRequest(){
+    return({
+        type: ACTION_TYPES.REFRESH_SESSION_REQUEST
+    })
+}
+export function refreshSessionSuccess(data){
+    return({
+        type: ACTION_TYPES.REFRESH_SESSION_SUCCESS,
+        data
+    })
+}
+export function refreshSessionError(error){
+    return({
+        type: ACTION_TYPES.REFRESH_SESSION_ERROR,
+        error
+    })
+}

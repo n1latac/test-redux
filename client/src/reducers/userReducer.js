@@ -95,6 +95,26 @@ export default function reducer(state = initialState, action){
                 error: action.error
             }
         }
+        case ACTION_TYPES.REFRESH_SESSION_REQUEST:{
+            return{
+                ...state,
+                isFetching: true
+            }
+        }
+        case ACTION_TYPES.REFRESH_SESSION_SUCCESS:{
+            return{
+                ...state,
+                isFetching: false,
+                user: action.data
+            }
+        }
+        case ACTION_TYPES.REFRESH_SESSION_ERROR:{
+            return{
+                ...state,
+                isFetching: false,
+                error: action.error
+            }
+        }
         default:{
             return{
                 ...state

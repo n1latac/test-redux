@@ -6,6 +6,7 @@ const {checkToken} = require('../middlewares/checkToken')
 const userRouter = Router()
 
 userRouter.get('/getMe', checkToken, userController.getMe)
+userRouter.post('/refresh', userController.refreshSession)
 userRouter.post('/signup', createPasswordHash, userController.createUser)
 userRouter.post('/login', userController.loginUser)
 userRouter.get('/exit',checkToken,userController.userExit)

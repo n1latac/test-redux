@@ -3,6 +3,8 @@ const path = require('node:path')
 const cors = require('cors')
 const router = require('./routes/index')
 const app = express()
+const dotenv = require('dotenv')
+dotenv.config()
 
 app.use(cors())
 

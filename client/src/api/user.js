@@ -17,3 +17,8 @@ export async function userExit(){
     const {data} = await instance.get('/user/exit')
     return data
 }
+export async function refresh(){
+    const refreshToken = localStorage.getItem('refreshToken')
+    const {data} = await instance.post('/user/refresh',{refreshToken})
+    return data
+}

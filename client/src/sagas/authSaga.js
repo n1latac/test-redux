@@ -2,21 +2,22 @@ import {put} from 'redux-saga/effects'
 import history from '../browserHistory'
 import {toast} from 'react-toastify'
 
-import { register, login, checkAuth, userExit } from '../api/user'
+import { register, login, checkAuth, userExit, refresh } from '../api/user'
 import { registerUserSuccess, registerUserError,
 loginUserError, loginUserSuccess,
 getMeSuccess, getMeError,
-userExitSuccess, userExitError } from '../actions/actionCreator'
+userExitSuccess, userExitError,
+refreshSessionSuccess, refreshSessionError } from '../actions/actionCreator'
 
 
 
 export function* registerSaga(action){
     try {
-        const {data, tokens:{accessToken}, message} = yield register(action.payload)
+        const {data, tokens:{accessToken, refreshToken}, message} = yield register(action.payload)
         localStorage.setItem('accessToken', accessToken)
-        console.log(data, 'data')
+        localStorage.setItem('refreshToken', refreshToken)
         yield put(registerUserSuccess(data))
-        toast(message, {position: 'bottom-right'})
+        toast(message)
         history.push('/')
     } catch (error) {
         yield put(registerUserError(error.response.data.error))
@@ -25,10 +26,11 @@ export function* registerSaga(action){
 }
 export function* loginUserSaga(action){
     try {
-        const {tokens: {accessToken}, data, message} = yield login(action.payload)
+        const {tokens: {accessToken, refreshToken}, data, message} = yield login(action.payload)
          yield put(loginUserSuccess(data))
          localStorage.setItem('accessToken', accessToken)
-         toast(message, {position: 'bottom-right'})
+         localStorage.setItem('refreshToken', refreshToken)
+         toast(message)
          history.push('/')
     } catch (error) {
         yield put(loginUserError(error.response.data.error))
@@ -41,14 +43,24 @@ export function* checkAuthSaga(){
         const user = yield checkAuth()
         yield put(getMeSuccess(user))
     } catch (error) {
-        console.log(error)
         yield put(getMeError(error.errorMessage))
+    }
+}
+export function* refreshSessionSaga(){
+    try {
+        const {data, tokens: {accessToken, refreshToken}} = yield refresh()
+        localStorage.setItem('accessToken', accessToken)
+        localStorage.setItem('refreshToken', refreshToken)
+        yield put(refreshSessionSuccess(data))
+    } catch (error) {
+        yield put(refreshSessionError(error.errorMessage))
     }
 }
 export function* userExitSaga(){
     try {
         const result = yield userExit()
         localStorage.removeItem('accessToken')
+        localStorage.removeItem('refreshToken')
         yield put(userExitSuccess())
         toast(result.message)
         history.push('/')

@@ -1,4 +1,8 @@
 import axios from 'axios'
+import { refresh } from './user'
+import  store  from '../store'
+import {refreshSessionRequest} from '../actions/actionCreator'
+ 
 
 export const instance = axios.create({
     baseURL: 'http://localhost:5000/api'
@@ -14,12 +18,14 @@ instance.interceptors.request.use(function(config){
     return Promise.reject(error)
 })
 
-instance.interceptors.response.use(function(response){
+instance.interceptors.response.use(async (response)=>{
     return response
     
-}, function(err){
+}, async function(err){
     if(err.response.status === 403){
-        return Promise.reject({errorMessage: 'Нет доступа'})
+         await store.dispatch(refreshSessionRequest())
+         return
+        
     }
     return Promise.reject(err)
 })

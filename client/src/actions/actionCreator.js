@@ -138,3 +138,21 @@ export function refreshSessionError(error){
         error
     })
 }
+export function createCommentRequest(payload){
+    return({
+        type: ACTION_TYPES.CREATE_COMMENT_REQUEST,
+        payload
+    })
+}
+export function createCommentSuccess(data){
+    return({
+        type: ACTION_TYPES.CREATE_COMMENT_SUCCESS,
+        data
+    })
+}
+export function createCommentError(error){
+    return({
+        type: ACTION_TYPES.CREATE_COMMENT_ERROR,
+        error
+    })
+}

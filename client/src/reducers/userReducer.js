@@ -3,7 +3,7 @@ import ACTION_TYPES from '../actions/actionTypes'
 const initialState = {
     isFetching: false,
     user: null,
-    error: null,
+    error: null
 }
 
 export default function reducer(state = initialState, action){

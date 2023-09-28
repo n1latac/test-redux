@@ -5,12 +5,11 @@ import PopUpExit from '../PopUpExit'
 
 
 function Header(props) {
-  console.log(props)
   return (
-    <header class="bg-slate-200 relative">
+    <header class="relative bg-[#0a2a43] bg-cover bg-opacity-1">
       <div class="py-4 px-5 flex justify-between items-center">
         <Link to={'/'}>
-          <img src='./images/logo_1.ico' class="w-8 h-8 hover:cursor-pointer" />
+          <img src='./images/logo_1.ico' class="w-8 h-8 hover:cursor-pointer" alt='logo' />
         </Link>
         <nav>
           <ul class="flex">

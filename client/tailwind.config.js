@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage:{
-        'signUp': "url('../public/images/signUp.jpg')"
+        'signUp': "url('../public/images/signUp.jpg')",
+        'headerBG': "url('../public/images/bg.jpg')"
       },
       boxShadow:{
         'custom': '0px 0px 8px 2px rgba(0, 0, 0, 0.5)'

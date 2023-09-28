@@ -156,3 +156,21 @@ export function createCommentError(error){
         error
     })
 }
+export function getCommentsRequest(payload){
+    return({
+        type: ACTION_TYPES.GET_COMMENTS_REQUEST,
+        payload
+    })
+}
+export function getCommentsSuccess(data){
+    return({
+        type: ACTION_TYPES.GET_COMMENTS_SUCCESS,
+        data
+    })
+}
+export function getCommentsError(error){
+    return({
+        type: ACTION_TYPES.GET_COMMENTS_ERROR,
+        error
+    })
+}

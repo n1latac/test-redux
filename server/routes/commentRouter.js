@@ -4,6 +4,7 @@ const commentController = require('../controllers/comment.controller')
 
 const commentRouter = Router()
 
-commentRouter.post('/', checkToken, commentController.createComment)
+commentRouter.post('/:postId', checkToken, commentController.createComment)
+commentRouter.get('/:postId', commentController.getComments)
 
 module.exports = commentRouter

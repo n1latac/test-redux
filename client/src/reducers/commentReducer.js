@@ -28,6 +28,26 @@ export default function commentReducer(state = initialState, action){
                 error: action.error
             }
         }
+        case ACTION_TYPES.GET_COMMENTS_REQUEST:{
+            return{
+                ...state,
+                isFetching: true
+            }
+        }
+        case ACTION_TYPES.GET_COMMENTS_SUCCESS:{
+            return{
+                ...state,
+                isFetching: false,
+                comments: action.data
+            }
+        }
+        case ACTION_TYPES.GET_COMMENTS_ERROR:{
+            return{
+                ...state,
+                isFetching: false,
+                error: action.error
+            }
+        }
         default:{
             return{
                 ...state

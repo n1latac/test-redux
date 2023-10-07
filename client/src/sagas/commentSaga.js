@@ -1,9 +1,11 @@
 import {put} from 'redux-saga/effects'
 
-import {createComment, getComments} from '../api/comment'
+import {createComment, getComments, deleteComment, updateComment} from '../api/comment'
 
 import {createCommentSuccess, createCommentError,
-getCommentsSuccess, getCommentsError} from '../actions/actionCreator'
+getCommentsSuccess, getCommentsError,
+deleteCommentSuccess, deleteCommentError,
+updateCommentError, updateCommentSuccess} from '../actions/actionCreator'
 
 export function* createCommentSaga(action){
     try {
@@ -21,5 +23,22 @@ export function* getCommentsSaga(action){
         console.log(comments)
     } catch (error) {
         yield put(getCommentsError(error))
+    }
+}
+export function* deleteCommentSaga(action){
+    try {
+        const deletedComment = yield deleteComment(action.payload)
+        yield put(deleteCommentSuccess(deletedComment._id))
+    } catch (error) {
+        yield put(deleteCommentError(error))
+    }
+}
+export function* updateCommentSaga(action){
+    try {
+        const updatedComment = yield updateComment(action.payload)
+        console.log(updatedComment)
+        yield put(updateCommentSuccess(updatedComment))
+    } catch (error) {
+        yield put(deleteCommentError(error))
     }
 }

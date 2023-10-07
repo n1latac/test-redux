@@ -1,4 +1,5 @@
 const Post = require('../models/Post')
+const Comment = require('../models/Comment')
 
 module.exports.createPost = async(req, res, next)=>{
     try {
@@ -39,7 +40,6 @@ module.exports.postById = async(req, res, next)=>{
 
 module.exports.changePost = async(req, res, next) => {
     try {
-        console.log(req.body)
         if(req.file){
             const {params: {postId}, body: {text, title}, file: {path}} = req
             const post = await Post.findByIdAndUpdate(postId, {text, title, imagePath: path})
@@ -58,6 +58,7 @@ module.exports.deletePost = async(req, res, next) => {
     try {
         const {params: {postId}} = req
         const deletedPost = await Post.deleteOne({_id: postId})
+        await Comment.deleteMany({postId: postId})
         res.status(200).send(deletedPost)
     } catch (error) {
         res.status(400).send({errorMessage: `can't delete post`})

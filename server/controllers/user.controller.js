@@ -61,10 +61,8 @@ module.exports.refreshSession = async(req, res, next) => {
     try {
         const {body:{refreshToken}} = req
         const RT = await verifyRefreshToken(refreshToken)
-        console.log(RT)
         if(RT.userId){
             const foundUser = await User.findById(RT.userId)
-            console.log(foundUser)
             const accessToken = await createToken({userId: foundUser._id, email: foundUser.email})
             const refreshT = await createRefreshToken({userId: foundUser._id, email: foundUser.email})
             res.status(200).send({data: foundUser, tokens: {accessToken, refreshToken: refreshT}})

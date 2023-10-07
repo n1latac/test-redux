@@ -43,16 +43,10 @@ function PostPage(props) {
   const handleChangeComment = (event) => {
     setComment(event.target.value)
   }
-  let type 
-  if(typeof(props.commentStore.comments) === 'object'){
-    type = true
-  }else{
-    type = false
-  }
- 
+
   return (
 
-    <div className='bg-violet-300'>
+    <div className='bg-headerBG'>
       {post ?
         <section className='flex flex-col min-h-screen w-3/4 mx-auto bg-violet-100 px-8'>
           <div className='flex flex-col my-4'>
@@ -75,9 +69,9 @@ function PostPage(props) {
               </form>
             </section>
           }
-          {type  &&
+          {props.commentStore.comments  &&
             <div> 
-              {props.commentStore.comments.map(com=><Comment comment={com} />)}
+              {props.commentStore.comments.map(com=><Comment comment={com} postId={params.postId}/>)}
             </div>
           }
 

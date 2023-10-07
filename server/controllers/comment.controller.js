@@ -18,8 +18,36 @@ module.exports.getComments = async(req, res, next)=>{
     try {
         const {params: {postId}} = req
         const comments = await Comment.find({postId: postId}).populate('authorId')
-        console.log(comments)
         res.status(200).send(comments)
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
+}
+module.exports.deleteComment = async(req, res, next)=>{
+    try {
+        console.log(req.body, req.params)
+        const {body: {commentId}, params: {postId}} = req
+        const post = await Post.findOneAndUpdate({_id: postId},{$pull:{comments: commentId}})
+        const deletedComment = await Comment.findOneAndDelete({_id: commentId})
+        res.status(200).send(deletedComment)
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
+}
+
+module.exports.updateComment = async(req, res, next)=>{
+    try {
+        const { body: { newText, commentId } } = req;
+        const updatedComment = await Comment.findById(commentId).populate('authorId');
+        if (!updatedComment) {
+            return res.status(404).send("Комментарий не найден");
+        }
+
+        updatedComment.text = newText;
+        await updatedComment.save();
+
+        console.log(updatedComment);
+        res.status(200).send(updatedComment);
     } catch (error) {
         res.status(400).send(error.message)
     }

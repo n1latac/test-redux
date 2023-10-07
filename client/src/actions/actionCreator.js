@@ -174,3 +174,39 @@ export function getCommentsError(error){
         error
     })
 }
+export function deleteCommentRequest(payload){
+    return({
+        type: ACTION_TYPES.DELETE_COMMENT_REQUEST,
+        payload
+    })
+}
+export function deleteCommentSuccess(data){
+    return({
+        type: ACTION_TYPES.DELETE_COMMENT_SUCCESS,
+        data
+    })
+}
+export function deleteCommentError(error){
+    return({
+        type: ACTION_TYPES.DELETE_COMMENT_ERROR,
+        error
+    })
+}
+export function updateCommentRequest(payload){
+    return({
+        type: ACTION_TYPES.UPDATE_COMMENT_REQUEST,
+        payload
+    })
+}
+export function updateCommentSuccess(data){
+    return({
+        type: ACTION_TYPES.UPDATE_COMMENT_SUCCESS,
+        data
+    })
+}
+export function updateCommentError(error){
+    return({
+        type: ACTION_TYPES.UPDATE_COMMENT_ERROR,
+        error
+    })
+}

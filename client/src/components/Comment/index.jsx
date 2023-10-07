@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { connect } from 'react-redux'
-import {deleteCommentRequest, updateCommentRequest} from '../../actions/actionCreator'
+import { format } from 'date-fns'
+import { deleteCommentRequest, updateCommentRequest } from '../../actions/actionCreator'
 import 'boxicons'
 
 function Comment(props) {
@@ -48,11 +49,11 @@ function Comment(props) {
         <div className='w-full bg-slate-400 min-h-[100px] rounded-xl text-white px-8 py-2 mb-8'>
             <div className='flex justify-between text-black'>
                 <h2>{`${comment.authorId.firstName} ${comment.authorId.lastName}:`}</h2>
-                <p>{comment.created_at}</p>
+                <p>{format(new Date(comment.created_at), 'dd.MM.yyyy HH:mm')}</p>
             </div>
             {!state && <p>{comment.text}</p>}
             <textarea className={state ? 'bg-slate-300 w-full break-words' : 'hidden'} ref={inputRef} type="text" value={text} onChange={commentHandler} />
-            {props.userStore.user._id === comment.authorId._id &&
+            {props.userStore.user ? props.userStore.user._id === comment.authorId._id &&
                 <div className='flex justify-between'>
                     {state && <div className='cursor-pointer' onClick={changeComment}>Change</div>}
                     <div className='flex justify-end w-full'>
@@ -60,6 +61,7 @@ function Comment(props) {
                         <div onClick={deleteComment} className='cursor-pointer'><box-icon name='comment-x' animation='tada-hover'></box-icon></div>
                     </div>
                 </div>
+                : null
             }
 
         </div>

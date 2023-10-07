@@ -46,7 +46,6 @@ module.exports.updateComment = async(req, res, next)=>{
         updatedComment.text = newText;
         await updatedComment.save();
 
-        console.log(updatedComment);
         res.status(200).send(updatedComment);
     } catch (error) {
         res.status(400).send(error.message)

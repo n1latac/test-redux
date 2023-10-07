@@ -53,7 +53,7 @@ function PostPage(props) {
             <h3 className='text-center text-3xl text-slate-700 mb-4'>{post.title}</h3>
             <p className='text-slate-600'>{post.text}</p>
           </div>
-          {post.imagePath && <img className='w-full object-cover border-2' src={`http://localhost:5000/${post.imagePath}`} alt="" />}
+          {post.imagePath && <img className='w-full object-cover border-2 mb-8' src={`http://localhost:5000/${post.imagePath}`} alt="" />}
           {props.userStore.user ? props.userStore.user._id === post.authorId && (
             <div className='flex justify-end pr-8 my-8'>
               <Link to={`/ownPosts/edit/${params.postId}`}><button className='w-[150px] bg-violet-300 rounded-xl py-2 hover:bg-violet-600 hover:text-white mr-4'>Change POST</button></Link>

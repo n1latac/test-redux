@@ -18,11 +18,22 @@ module.exports.createPost = async(req, res, next)=>{
     }
 }
 
-module.exports.getOwnPosts = async(req, res, next)=>{
-    const {userIdFromToken} = req
+module.exports.getOwnPosts = async (req, res, next) => {
+    const { userIdFromToken } = req
     try {
-        const posts = await Post.find({authorId: userIdFromToken})
-        res.status(200).send(posts)
+        const page = req.query.page || 1
+        const perPage = req.query.perPage || 5
+
+        const totalOwnPostsCount = await Post.find({ authorId: userIdFromToken }).countDocuments()
+        const totalPages = Math.ceil(totalOwnPostsCount / perPage)
+
+
+
+        const posts = await Post.find({ authorId: userIdFromToken }).limit(perPage).skip((page - 1) * perPage)
+
+
+
+        res.status(200).send({ posts, totalPages })
     } catch (error) {
         res.status(400).send(error.message)
     }
@@ -67,7 +78,7 @@ module.exports.deletePost = async(req, res, next) => {
 module.exports.getAllPosts = async(req, res, next)=>{
     try {
         const page = req.query.page || 1
-        const perPage = req.query.perPage || 3
+        const perPage = req.query.perPage || 5
 
         const totalDocuments = await Post.countDocuments()
         const totalPages = Math.ceil(totalDocuments / perPage)

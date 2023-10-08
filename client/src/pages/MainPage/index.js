@@ -34,9 +34,9 @@ function MainPage(props) {
                                 {posts.map((post) => <Post post={post} />)}
                             </ul>
                             <div className='mt-8 flex justify-center'>
-                                <button onClick={()=> handlePageChange(page-1)} className='text-slate-600'>Previous</button>
+                                <button onClick={()=> handlePageChange(page-1)} className={page === 1 ? 'text-slate-400 cursor-default' : 'text-slate-600'}>Previous</button>
                                 <span className='block mx-4'>Page {page} of {props.pages}</span>
-                                <button onClick={()=> handlePageChange(page+1)} className='text-slate-600'>Next</button>
+                                <button onClick={()=> handlePageChange(page+1)} className={page === props.pages ? 'text-slate-400 cursor-default' : 'text-slate-600'}>Next</button>
                             </div>
                         </div>
                     </section>

@@ -36,10 +36,12 @@ export default function postReducer(state = initialState, action){
             }
         }
         case ACTION_TYPES.GET_OWN_POSTS_SUCCESS:{
+            const {data: {posts, totalPages}} = action
             return{
                 ...state,
                 isFetching: false,
-                posts: action.data
+                posts: posts,
+                pages: totalPages
             }
         }
         case ACTION_TYPES.GET_OWN_POSTS_ERROR:{

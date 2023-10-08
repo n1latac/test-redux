@@ -16,10 +16,10 @@ export function* addPostSaga(action){
     }
 }
 
-export function* getOwnPostsSaga(){
+export function* getOwnPostsSaga(action){
     try {
-        const posts = yield getOwnPosts()
-        yield put(getOwnPostsSuccess(posts))
+        const data = yield getOwnPosts(action.payload)
+        yield put(getOwnPostsSuccess(data))
     } catch (error) {
         yield put(getOwnPostsError(error))
     }

@@ -51,7 +51,7 @@ function PostPage(props) {
         <section className='flex flex-col min-h-screen w-3/4 mx-auto bg-violet-100 px-8'>
           <div className='flex flex-col my-4'>
             <h3 className='text-center text-3xl text-slate-700 mb-4'>{post.title}</h3>
-            <p className='text-slate-600'>{post.text}</p>
+            <p className='text-slate-600 overflow-auto'>{post.text}</p>
           </div>
           {post.imagePath && <img className='w-full object-cover border-2 mb-8' src={`http://localhost:5000/${post.imagePath}`} alt="" />}
           {props.userStore.user ? props.userStore.user._id === post.authorId && (

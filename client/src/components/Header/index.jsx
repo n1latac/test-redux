@@ -6,7 +6,7 @@ import PopUpExit from '../PopUpExit'
 
 function Header(props) {
   return (
-    <header class="relative bg-bg bg-cover bg-opacity-1">
+    <header class="bg-bg bg-cover bg-opacity-1 sticky top-0 z-10">
       <div class="py-4 px-5 flex justify-between items-center">
         <Link to={'/'}>
           <img src='./images/logo_1.ico' class="w-8 h-8 hover:cursor-pointer" alt='logo' />

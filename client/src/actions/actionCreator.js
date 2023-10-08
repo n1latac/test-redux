@@ -87,9 +87,10 @@ export function createPostError(error){
         error
     })
 }
-export function getOwnPostsRequest(){
+export function getOwnPostsRequest(payload){
     return({
-        type: ACTION_TYPES.GET_OWN_POSTS_REQUEST
+        type: ACTION_TYPES.GET_OWN_POSTS_REQUEST,
+        payload
     })
 }
 export function getOwnPostsSuccess(data){

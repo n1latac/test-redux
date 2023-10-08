@@ -74,6 +74,7 @@ function PostPage(props) {
               {props.commentStore.comments.map(com=><Comment comment={com} postId={params.postId}/>)}
             </div>
           }
+          
 
 
         </section>

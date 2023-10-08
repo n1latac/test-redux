@@ -3,7 +3,8 @@ import ACTION_TYPES from '../actions/actionTypes'
 const initialState = {
     isFetching: false,
     error: null,
-    posts: []
+    posts: [],
+    pages: null
 }
 
 export default function postReducer(state = initialState, action){
@@ -55,10 +56,12 @@ export default function postReducer(state = initialState, action){
             }
         }
         case ACTION_TYPES.GET_ALL_POSTS_SUCCESS:{
+            const {data: {allPosts, totalPages}} = action
             return{
                 ...state,
                 isFetching: false,
-                posts: action.data
+                posts: allPosts,
+                pages: totalPages
             }
         }
         case ACTION_TYPES.GET_ALL_POSTS_ERROR:{

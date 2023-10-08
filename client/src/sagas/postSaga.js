@@ -24,10 +24,10 @@ export function* getOwnPostsSaga(){
         yield put(getOwnPostsError(error))
     }
 }
-export function* getAllPostsSaga(){
+export function* getAllPostsSaga(action){
     try {
-        const allPosts = yield getAllPosts()
-        yield put(getAllPostsSuccess(allPosts))
+        const data = yield getAllPosts(action.payload)
+        yield put(getAllPostsSuccess(data))
     } catch (error) {
         console.log(error)
         yield put(getAllPostsError(error.errorMessage))

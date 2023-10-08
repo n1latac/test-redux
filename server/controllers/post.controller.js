@@ -66,8 +66,19 @@ module.exports.deletePost = async(req, res, next) => {
 }
 module.exports.getAllPosts = async(req, res, next)=>{
     try {
+        const page = req.query.page || 1
+        const perPage = req.query.perPage || 3
+
+        const totalDocuments = await Post.countDocuments()
+        const totalPages = Math.ceil(totalDocuments / perPage)
+
+
         const allPosts = await Post.find()
-        res.status(200).send(allPosts)
+            .limit(perPage)
+            .skip((page - 1) * perPage)
+        
+
+        res.status(200).send({allPosts, totalPages})
     } catch (error) {
         res.status(400).send({errorMessage: `can't get all posts`})
     }

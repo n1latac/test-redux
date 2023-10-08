@@ -104,9 +104,10 @@ export function getOwnPostsError(error){
         error
     })
 }
-export function getAllPostsRequest(){
+export function getAllPostsRequest(payload){
     return({
-        type: ACTION_TYPES.GET_ALL_POSTS_REQUEST
+        type: ACTION_TYPES.GET_ALL_POSTS_REQUEST,
+        payload
     })
 }
 export function getAllPostsSuccess(data){

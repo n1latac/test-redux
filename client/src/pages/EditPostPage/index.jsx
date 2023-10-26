@@ -64,16 +64,16 @@ function EditPostPage(props) {
    
 
   return (
-    <div class='bg-indigo-200 h-screen flex justify-center pt-4'>
+    <div class='bg-headerBG min-h-screen flex justify-center lg:pt-4'>
       {post ?
       <Formik
       initialValues={formik.initialValues}
       onSubmit={formik.handleSubmit}
     >
              {(formikProps) => (
-            <Form class='flex w-3/4 h-[500px] bg-indigo-300 rounded-xl'>
-              <section className='flex flex-col items-center w-1/2 mr-4'>
-                <label className='mt-6 w-full rounded-xl cursor-pointer border-black border-2 flex justify-center py-8 border-dotted bg-slate-300 hover:bg-slate-400'>
+            <Form class='md:flex-row flex flex-col sm:w-3/4 md:h-[500px] bg-[#2d5470] md:rounded-xl relative z-2 shadow-custom2 p-4'>
+              <section className='flex flex-col items-center md:w-1/2 md:mr-4'>
+                <label className='mt-6 w-full rounded-xl cursor-pointer border-black border-4 flex justify-center py-8 border-dotted bg-slate-300 hover:border-solid hover:border-4'>
                   Прикрепить изображение:
                   <input
                     className='hidden'
@@ -89,7 +89,7 @@ function EditPostPage(props) {
                   typeof formik.values.postImage === 'string' ? (
                     <div className='py-8'>
                       <img
-                        className='w-[400px] h-[300px] object-cover'
+                        className='w-[400px] h-[300px] object-cover border-2 border-black rounded-md shadow-custom'
                         src={`http://localhost:5000/${formik.values.postImage}`}
                         alt=""
                       />
@@ -97,20 +97,20 @@ function EditPostPage(props) {
                   ) : (
                     <div className='py-8'>
                       <img
-                        className='w-[400px] h-[300px] object-cover'
+                        className='w-[400px] h-[300px] object-cover border-2 border-black rounded-md shadow-custom'
                         src={URL.createObjectURL(formik.values.postImage)}
                         alt=""
                       />
                     </div>
                   )
-                ) : null}
+                ) : <div className='w-[400px] h-[300px] border-2 border-black border-dotted my-8 rounded-md shadow-custom'></div>}
 
               </section>
 
-              <section className='flex flex-col justify-between w-1/2'>
+              <section className='flex flex-col justify-between md:w-1/2'>
                 <div className='mt-6 flex flex-col'>
-                  <input className='mb-14 text-2xl px-4 py-2 text-center bg-slate-100 outline-none rounded-xl' maxLength={30} type='text' name="title" placeholder="title" onChange={e => formik.setFieldValue('title', e.target.value)} value={formik.values.title} />
-                  <textarea className='px-4 py-2 bg-slate-100 outline-none rounded-xl resize-none h-[300px]' maxLength={600} type='text' name="text" placeholder="text" onChange={e => formik.setFieldValue('text', e.target.value)} value={formik.values.text} />
+                  <input className='mb-6 text-2xl px-4 py-2 text-center bg-slate-300 focus:border-4 border-slate-300 border-4 focus:border-black focus:text-black outline-none rounded-xl' maxLength={30} type='text' name="title" placeholder="title" onChange={e => formik.setFieldValue('title', e.target.value)} value={formik.values.title} />
+                  <textarea className='mb-6 px-4 py-2 bg-slate-300 outline-none rounded-xl resize-none h-[300px] bg-inherit border-2 border-slate-300 focus:bg-slate-300 focus:text-black focus:border-black' maxLength={600} type='text' name="text" placeholder="text" onChange={e => formik.setFieldValue('text', e.target.value)} value={formik.values.text} />
                 </div>
                 <div className='flex justify-between'>
                 <button onClick={editPost} class='w-1/3 mb-6 border-black bg-slate-300 py-2 rounded-2xl hover:bg-slate-500 hover:text-white' type="submit">Change</button>

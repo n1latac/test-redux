@@ -6,7 +6,7 @@ import {userExitRequest} from '../../actions/actionCreator'
 
 function PopUpExit(props) {
   return (
-    <Popup trigger={<button class="py-2 px-3 border-2 border-transparent hover:border-gray-500 hover:bg-slate-300 transition-all duration-200" >
+    <Popup trigger={<button class="py-2 px-3 border-2 border-gray-500 bg-slate-300 hover:transform hover:scale-110 transition-all duration-200" >
             Выйти
           </button>} modal lockScroll overlayStyle={{"backgroundColor": "rgba(0, 0, 0, 0.5)"}} nested>
             {close=>(

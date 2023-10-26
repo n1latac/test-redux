@@ -46,9 +46,9 @@ function PostPage(props) {
 
   return (
 
-    <div className='bg-headerBG'>
+    <div className='bg-headerBG md:py-4 lg:py-8'>
       {post ?
-        <section className='flex flex-col min-h-screen w-3/4 mx-auto bg-violet-100 px-8'>
+        <section className='flex flex-col min-h-screen w-full md:rounded-lg md:w-3/4 lg:w-2/3 mx-auto bg-slate-100 px-8'>
           <div className='flex flex-col my-4'>
             <h3 className='text-center text-3xl text-slate-700 mb-4'>{post.title}</h3>
             <p className='text-slate-600 overflow-auto'>{post.text}</p>
@@ -56,8 +56,8 @@ function PostPage(props) {
           {post.imagePath && <img className='w-full object-cover border-2 mb-8' src={`http://localhost:5000/${post.imagePath}`} alt="" />}
           {props.userStore.user ? props.userStore.user._id === post.authorId && (
             <div className='flex justify-end pr-8 my-8'>
-              <Link to={`/ownPosts/edit/${params.postId}`}><button className='w-[150px] bg-violet-300 rounded-xl py-2 hover:bg-violet-600 hover:text-white mr-4'>Change POST</button></Link>
-              <button onClick={deletePost} className='w-[150px] bg-violet-300 rounded-xl py-2 hover:bg-violet-600 hover:text-white'>Delete POST</button>
+              <Link to={`/ownPosts/edit/${params.postId}`}><button className='w-[150px] bg-slate-400 rounded-xl py-2 hover:bg-blue-800 hover:text-white mr-4'>Change POST</button></Link>
+              <button onClick={deletePost} className='w-[150px] bg-slate-400 rounded-xl py-2 hover:bg-blue-800 hover:text-white'>Delete POST</button>
             </div>
 
           ) : null}
@@ -65,7 +65,7 @@ function PostPage(props) {
             <section className='my-8'>
               <form onSubmit={handleCreateComment} className='flex'>
                 <textarea className='resize-none w-full py-2 px-4 focus:outline-none shadow-lg rounded-md' onChange={handleChangeComment} value={comment}></textarea>
-                <button type='submit' className='border-1 border-black w-[200px] ml-2 rounded-xl bg-blue-300 shadow-xl text-lg hover:bg-blue-400 hover:text-white'>Send</button>
+                <button type='submit' className='border-1 border-black w-[200px] ml-2 rounded-xl bg-slate-400 shadow-xl text-lg hover:bg-blue-800 hover:text-white'>Send</button>
               </form>
             </section>
           }

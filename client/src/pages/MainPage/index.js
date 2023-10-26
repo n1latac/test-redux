@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
+import {RotatingLines} from 'react-loader-spinner'
 
 import {getAllPostsRequest} from '../../actions/actionCreator'
 import Post from '../../components/Post'
@@ -22,14 +23,22 @@ function MainPage(props) {
     }
 
   return (
-    <>
-    {isFetching
-     ? 
-    <div>Loading...</div>
+      <>
+          {isFetching
+              ?
+              <div className='flex justify-center items-center h-screen bg-[#124972]'>
+                  <RotatingLines
+                      strokeColor="grey"
+                      strokeWidth="5"
+                      animationDuration="0.75"
+                      width="96"
+                      visible={true}
+                  />
+              </div>
                 :
                 <div>
-                    <section className='bg-headerBG pt-8 min-h-screen'>
-                        <div className='w-2/3 m-auto bg-stone-200 p-8 min-h-[700px]'>
+                    <section className='bg-headerBG md:py-4 lg:py-8 min-h-screen'>
+                        <div className='xs:w-full md:w-3/4 lg:w-2/3 m-auto bg-stone-200 p-8 min-h-[700px] rounded-md'>
                             <ul>
                                 {posts.map((post) => <Post post={post} />)}
                             </ul>

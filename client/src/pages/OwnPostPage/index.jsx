@@ -29,8 +29,8 @@ function OwnPostPage(props) {
               <div>Loading...</div>
               :
               <div>
-                  <section className='bg-headerBG pt-8 min-h-screen'>
-                      <div className='w-2/3 m-auto bg-stone-200 p-8 min-h-[700px]'>
+                  <section className='bg-headerBG md:py-4 lg:py-8 min-h-screen'>
+                      <div className='m-auto bg-stone-200 p-8 min-h-[700px] xs:w-full md:w-3/4 lg:w-2/3 rounded-md'>
                           <ul>
                               {posts.map((post) => <Post post={post} />)}
                           </ul>

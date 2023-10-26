@@ -8,9 +8,9 @@ function Header(props) {
   const [navMenu, setNavMenu] = useState(false)
   const navBarRef = useRef(null)
 
-  const closeNavMenu = () => {
-    if(navBarRef.current){
-      setNavMenu(navMenu=>!navMenu)
+  const closeNavMenu = (event) => {
+    if(navBarRef.current && navBarRef.current.contains(event.target)){
+      setNavMenu(true)
     }else{
       setNavMenu(false)
     }

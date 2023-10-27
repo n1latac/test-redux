@@ -27,6 +27,8 @@ module.exports.loginUser = async(req, res, next) => {
     try {
         const {email, password} = req.body
         const foundUser = await User.findOne({email})
+        console.log(process.env.ACCESS_SECRET)
+        console.log(foundUser, 'hi')
         if(foundUser){
             const result = await bcrypt.compare(password, foundUser.password)
             if(result){

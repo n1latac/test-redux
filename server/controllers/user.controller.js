@@ -2,6 +2,13 @@ const bcrypt = require('bcrypt')
 const User = require('../models/User')
 const {verifyRefreshToken} = require('../services/tokenAuth')
 
+const {promisify} = require('util')
+const jwt = require('jsonwebtoken')
+
+const promisifyJwtSign = promisify(jwt.sign)
+const promisifyJwtVerify = promisify(jwt.verify)
+
+
 module.exports.createUser = async(req, res, next) => {
     try {
         const {body, passwordHash} = req

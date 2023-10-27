@@ -4,26 +4,23 @@ const jwt = require('jsonwebtoken')
 const promisifyJwtSign = promisify(jwt.sign)
 const promisifyJwtVerify = promisify(jwt.verify)
 
-const accessSecret = process.env.ACCESS_SECRET
-const refreshSecret = proccess.env.REFRESH_SECRET
-
 
 module.exports.createToken = async({userId, email})=>{
-    return await promisifyJwtSign({userId, email}, accessSecret,{
+    return await promisifyJwtSign({userId, email}, process.env.ACCESS_SECRET,{
         expiresIn: 60*60
     })
 }
 
 module.exports.verifyToken = async(token)=>{
-    return await promisifyJwtVerify(token, accessSecret)
+    return await promisifyJwtVerify(token, process.env.ACCESS_SECRET)
 }
 
 module.exports.createRefreshToken = async({userId, email}) => {
-    return await promisifyJwtSign({userId, email}, refreshSecret,{
+    return await promisifyJwtSign({userId, email}, process.env.REFRESH_SECRET,{
         expiresIn: '7d'
     })
 }
 
 module.exports.verifyRefreshToken = async(token)=>{
-    return await promisifyJwtVerify(token, refreshSecret)
+    return await promisifyJwtVerify(token, process.env.REFRESH_SECRET)
 }

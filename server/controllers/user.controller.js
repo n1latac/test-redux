@@ -25,29 +25,29 @@ module.exports.createUser = async(req, res, next) => {
 }
 module.exports.loginUser = async(req, res, next) => {
     try {
-        console.log(body)
-        const {email, password} = req.body
-        const foundUser = await User.findOne({email})
-        console.log(process.env.ACCESS_SECRET)
-        console.log(foundUser, 'hi')
-        if(foundUser){
-            const result = await bcrypt.compare(password, foundUser.password)
-            if(result){
-                console.log(process.env.ACCESS_SECRET)
-                console.log(process.env.REFRESH_SECRET)
-                const accessToken = await createToken({userId: foundUser._id, email: foundUser.email})
-                const refreshToken = await createRefreshToken({userId: foundUser._id, email: foundUser.email})
+        console.log('HI')
+        // const {email, password} = req.body
+        // const foundUser = await User.findOne({email})
+        // console.log(process.env.ACCESS_SECRET)
+        // console.log(foundUser, 'hi')
+        // if(foundUser){
+        //     const result = await bcrypt.compare(password, foundUser.password)
+        //     if(result){
+        //         console.log(process.env.ACCESS_SECRET)
+        //         console.log(process.env.REFRESH_SECRET)
+        //         const accessToken = await createToken({userId: foundUser._id, email: foundUser.email})
+        //         const refreshToken = await createRefreshToken({userId: foundUser._id, email: foundUser.email})
 
-                const userWithoutPassword = foundUser.toObject()
-                delete userWithoutPassword.password
+        //         const userWithoutPassword = foundUser.toObject()
+        //         delete userWithoutPassword.password
 
-                res.status(200).send({message: 'you are log in', data: userWithoutPassword, tokens: {accessToken, refreshToken}})
-            }else{
-                res.status(401).send({error: 'password is incorrect'})
-            }
-        }else{
-            res.status(401).send({error: 'email is incorrect'})
-        }
+        //         res.status(200).send({message: 'you are log in', data: userWithoutPassword, tokens: {accessToken, refreshToken}})
+        //     }else{
+        //         res.status(401).send({error: 'password is incorrect'})
+        //     }
+        // }else{
+        //     res.status(401).send({error: 'email is incorrect'})
+        // }
     } catch (error) {
         res.status(401).send(error.message)
     }

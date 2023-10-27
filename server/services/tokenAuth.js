@@ -6,21 +6,21 @@ const promisifyJwtVerify = promisify(jwt.verify)
 
 
 module.exports.createToken = async({userId, email})=>{
-    return await promisifyJwtSign({userId, email}, process.env.ACCESS_SECRET,{
+    return await promisifyJwtSign({userId, email}, 'vcyeveyrebcDSJ',{
         expiresIn: 60*60
     })
 }
 
 module.exports.verifyToken = async(token)=>{
-    return await promisifyJwtVerify(token, process.env.ACCESS_SECRET)
+    return await promisifyJwtVerify(token, 'vcyeveyrebcDSJ')
 }
 
 module.exports.createRefreshToken = async({userId, email}) => {
-    return await promisifyJwtSign({userId, email}, process.env.REFRESH_SECRET,{
+    return await promisifyJwtSign({userId, email}, 'AFKSDFHSKDFJkdjh23sfkslk234',{
         expiresIn: '7d'
     })
 }
 
 module.exports.verifyRefreshToken = async(token)=>{
-    return await promisifyJwtVerify(token, process.env.REFRESH_SECRET)
+    return await promisifyJwtVerify(token, 'AFKSDFHSKDFJkdjh23sfkslk234')
 }

@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }))
 
 
 app.use('/uploads', express.static(`${__dirname}/uploads`))
-//app.use('/api', router)
+app.use('/api', router)
 app.use('/test',async(req, res)=>{
     try {
         res.send('hello3')

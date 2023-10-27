@@ -25,6 +25,7 @@ module.exports.createUser = async(req, res, next) => {
 }
 module.exports.loginUser = async(req, res, next) => {
     try {
+        console.log(body)
         const {email, password} = req.body
         const foundUser = await User.findOne({email})
         console.log(process.env.ACCESS_SECRET)

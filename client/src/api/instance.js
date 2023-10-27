@@ -5,7 +5,7 @@ import {refreshSessionRequest} from '../actions/actionCreator'
  
 
 export const instance = axios.create({
-    baseURL: 'https://test-redux-server-phi.vercel.app/api'
+    baseURL: 'https://test-redux-server-pdaolygsp-n1latac.vercel.app/api'
 })
 
 instance.interceptors.request.use(function(config){
@@ -29,3 +29,4 @@ instance.interceptors.response.use(async (response)=>{
     }
     return Promise.reject(err)
 })
+

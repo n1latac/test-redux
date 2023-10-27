@@ -30,6 +30,8 @@ module.exports.loginUser = async(req, res, next) => {
         if(foundUser){
             const result = await bcrypt.compare(password, foundUser.password)
             if(result){
+                console.log(process.env.ACCESS_SECRET)
+                console.log(process.env.REFRESH_SECRET)
                 const accessToken = await createToken({userId: foundUser._id, email: foundUser.email})
                 const refreshToken = await createRefreshToken({userId: foundUser._id, email: foundUser.email})
 

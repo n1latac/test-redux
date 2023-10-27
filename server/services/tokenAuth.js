@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken')
 const promisifyJwtSign = promisify(jwt.sign)
 const promisifyJwtVerify = promisify(jwt.verify)
 
-const accessSecret = 'vcyeveyrebcDSJ'
-const refreshSecret = 'AFKSDFHSKDFJkdjh23sfkslk234'
+const accessSecret = process.env.ACCESS_SECRET
+const refreshSecret = proccess.env.REFRESH_SECRET
 
 
 module.exports.createToken = async({userId, email})=>{

@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/User')
-const {createToken, createRefreshToken, verifyRefreshToken} = require('../services/tokenAuth')
+const {verifyRefreshToken} = require('../services/tokenAuth')
 
 module.exports.createUser = async(req, res, next) => {
     try {
@@ -23,6 +23,19 @@ module.exports.createUser = async(req, res, next) => {
         res.status(401).send(error.message)
     }
 }
+
+
+const createToken = async({userId, email})=>{
+    return await promisifyJwtSign({userId, email}, process.env.ACCESS_SECRET,{
+        expiresIn: 60*60
+    })
+}
+const createRefreshToken = async({userId, email}) => {
+    return await promisifyJwtSign({userId, email}, process.env.REFRESH_SECRET,{
+        expiresIn: '7d'
+    })
+}
+
 module.exports.loginUser = async(req, res, next) => {
     try {
         const {email, password} = req.body
